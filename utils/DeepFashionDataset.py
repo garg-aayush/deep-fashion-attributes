@@ -22,17 +22,18 @@ class DeepFashionDataset(Dataset):
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         image = self.transform(image)
 
-        label_neck = self.df['neck']
-        label_sleeve_length = self.df['sleeve_length']
-        label_pattern = self.df['pattern']
+        label_neck = self.df['neck'][index]
+        label_sleeve_length = self.df['sleeve_length'][index]
+        label_pattern = self.df['pattern'][index]
 
         # image to float32 tensor
-        image = torch.tensor(image, dtype=torch.float32)
+        image = image.type(torch.FloatTensor)
+        # torch.tensor(image, dtype=torch.float32)
 
         # labels to int tensors
-        label_neck = torch.tensor(label_neck, dtype=torch.int)
-        label_sleeve_length = torch.tensor(label_sleeve_length, dtype=torch.int)
-        label_pattern = torch.tensor(label_pattern, dtype=torch.int)
+        label_neck = torch.tensor(label_neck, dtype=torch.long)
+        label_sleeve_length = torch.tensor(label_sleeve_length, dtype=torch.long)
+        label_pattern = torch.tensor(label_pattern, dtype=torch.long)
 
         return {
             'image': image,
