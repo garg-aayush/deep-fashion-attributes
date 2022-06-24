@@ -88,6 +88,7 @@ python C_test.py --input test_image.jpg
 ## Observations and further improvements
 - The provided dataset consists of images and corresponding three attributes (`neck`, `sleeve_length`, `pattern`) (approx 2200 examples) in the csv file. However, each image_id in attribute file does not has corresponding image in the folder. Therefore, he had to do some pre-processing to the dataset. The jupyter notebook (`A_analyze_data.ipynb`) contains all the steps. 
 - The data has a lot of NaN (#N/A) values for each attribute. In order, to fill these values we assign a separate class for NaNs for each attribute.
+  - Weighted loss : make sure not learn from Nan values
 - Also, the data has a bias towards a particular class for each attribute (see the jupyter notebook). This degrades the model training
 - One of the possible ways to handle this bias is to augment the data for attributes and classes that are under-represented. This is something we propose to explore more in future. 
 - We currently use pre-trained `ResNet18` network for `ImageNet` for transfer learning. However, the better way could be to use a pretrained classification CNN on [Deep Fashion Dataset](https://mmlab.ie.cuhk.edu.hk/projects/DeepFashion.html). This is something that can also be done to improve the model performance.
